@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Recursion?</title> 
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Playfair+Display:700,400,900,400italic,700italic,900italic|Merriweather:400,300,700,900,300italic,400italic,700italic,900italic|Anonymous+Pro:400,700,400italic,700italic|Roboto:400,700' />
+    <link rel='stylesheet' type='text/css' href='https://cdn.rawgit.com/google/code-prettify/master/styles/desert.css' />
+    <link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' />
+
+
+<style>
+body {
+  margin:50px 10px;
+}
+
+#blog {
+  display: block; 
+  width: auto!important; 
+  overflow: hidden; 
+} 
+
+a, a.named_anchor {
+    text-decoration: inherit;
+    font-style: inherit;
+    color: inherit;
+  }
+  
+
+
+h1 {
+    letter-spacing: -0.06em;
+    margin-bottom: 0.05em;
+    line-height: 1em;
+}
+
+.byline {
+    font: normal normal 400 1.3em;
+    margin-bottom: .8em;
+    letter-spacing: -0.04em;
+  }
+
+.pubdate {
+    font: normal normal 400 1em;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+  }
+
+.pubtime:before {
+    font-family: 'FontAwesome';
+    font-size: .8em;
+    content:'\f054';
+    margin: 0em .5em;
+}
+
+hr {
+    border: 0;
+    border-bottom: 4px double;
+    height: 0.15em;
+}
+
+
+.topic {
+    font: normal normal 900 .8em;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+  }
+
+#article {
+  font: normal normal 400 1em/2em;
+  line-height: 2em;
+  text-align: justify;
+}
+
+a, a:link {
+    text-decoration: none;
+    cursor: pointer;
+    color: #1b98e0;
+}  
+
+.shade {
+  background: #eee;
+  padding: 0 0.2em;
+}
+    
+h2, h3, h4, h5 { 
+    font-weight: 650; 
+    font-size: 1.25em; 
+}
+
+
+p { 
+    margin-bottom:2em; 
+    line-height: 2em;
+}
+    
+
+p:first-child:first-letter { 
+      font-weight: 900;
+      float: left; 
+      font-size: 4em; 
+      line-height: 1em; 
+      padding: 0em 0.1em 0em 0em;
+}
+
+pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-left: 3px solid #F2957E;
+    color: #666;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
+}
+
+pre span {
+  color: #339b4b;
+}
+
+    </style>
+</head>
+<body>
+    
+
+
+    
+<div class="container">
+    <div id="blog">
+      <div id="title">
+        <div class="pubdate">14 March 2022<hr/></div>
+        <h1>What is Recursion?</h1>
+        <div class="byline">by Phoebe Yaheng Wu</div> 
+        <!-- <div class="topic">Data</div> -->
+      </div>
+      
+    
+      
+      <!-- Article text -->
+      <!-- <a class="named_anchor" name="2549202418499648455"></a> -->
+      <div id="article">
+        <div id="content"> 
+          <p>Suppose you want to buy a Big Mac from McDonald's drive-through. There seems to be an endless line in front of you, and you want to know how many cars are in front of yours so you can have the Big Mac before it goes out of stock. You ask the person in the car before yours, but he doesn’t know the answer, so he asks the person in the car in front of him. This goes on until it reaches the first car. The person in the first car tells the person in the second car that he is in spot one. The second car’s owner easily calculates that he is in spot two and tells the third car’s owner his spot number until the car in front of you tells you that he is in spot 99. Now you know you are in spot 100.</p>
+          <p>This is how recursion works. Instead of solving a big problem one time, you focus on solving the smallest version of the same problem and then recursively call the same function to solve a slightly bigger problem each time until you get the answer to your question. The smallest version of the problem is called the base case, while a function that calls itself, again and again, is the recursive case.</p>
+          <p>Below are some leetcode problem illustrations on how recursion can elegantly solve coding problems.</p> 
+
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/search-in-a-binary-search-tree/" target="_blank">https://leetcode.com/problems/search-in-a-binary-search-tree/</a></p>
+<pre>
+class Solution:
+  def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+      
+      if root is None or root.val == val:
+          return root
+      
+      return self.searchBST(root.left, val) if root.val > val else self.searchBST(root.right, val)
+</pre>
+
+  <p class="text-center text-muted"><a href="https://leetcode.com/problems/range-sum-of-bst/" target="_blank">https://leetcode.com/problems/range-sum-of-bst/</a></p>
+<pre>
+class Solution:
+  def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+
+      if root is None:
+          return 0
+      
+      if low <= root.val <= high:
+          return root.val + self.rangeSumBST(root.left, low, high) + self.rangeSumBST(root.right, low, high)
+      
+      elif root.val > high:
+          return self.rangeSumBST(root.left, low, high)
+      
+      else:
+          return self.rangeSumBST(root.right, low, high)
+</pre>
+
+  <p class="text-center text-muted"><a href="https://leetcode.com/problems/two-sum-iv-input-is-a-bst/" target="_blank">https://leetcode.com/problems/two-sum-iv-input-is-a-bst/</a></p> 
+<pre>
+class Solution:
+  def findTarget(self, root: Optional[TreeNode], k: int) -> bool:        
+      seen = set()
+      
+      def helper(node, k):
+          if node is None:
+              return False
+          
+          otherNum = k - node.val
+          
+          if otherNum in seen:
+              return True
+          
+          seen.add(node.val)
+          
+          return helper(node.left, k) or helper(node.right, k)
+      
+      return helper(root, k)
+</pre>
+  <p class="text-center text-muted"><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/" target="_blank">https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/</a></p>
+<pre>
+class Solution:
+  def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':   
+      if p.val > root.val and q.val > root.val:
+          return self.lowestCommonAncestor(root.right, p, q)
+          
+      elif p.val < root.val and q.val < root.val:
+          return self.lowestCommonAncestor(root.left, p, q)
+          
+      else:
+          return root
+</pre>
+  <p class="text-center text-muted"><a href="https://leetcode.com/problems/merge-two-binary-trees/" target="_blank">https://leetcode.com/problems/merge-two-binary-trees/</a></p>
+<pre>
+class Solution:
+  def mergeTrees(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> Optional[TreeNode]:
+      if root1 is None and root2 is None:
+          return None
+      
+      if root1 is None and root2 is not None:
+          return root2
+      
+      if root1 is not None and root2 is None:
+          return root1
+      
+      new_node = TreeNode()
+      
+      new_node.val = root1.val + root2.val
+
+      new_node.left = self.mergeTrees(root1.left, root2.left)
+
+      new_node.right = self.mergeTrees(root1.right, root2.right)
+      
+      return new_node
+</pre>
+  <p class="text-center text-muted"><a href="https://leetcode.com/problems/subsets/" target="_blank">https://leetcode.com/problems/subsets/</a></p>
+<pre>
+class Solution:
+  def subsets(self, nums: List[int]) -> List[List[int]]:
+      ans = []
+      temp = []
+
+      def helper(index, temp):      
+          if index == len(nums):
+              return ans.append(temp)
+
+          helper(index + 1, temp + [nums[index]])   
+          helper(index + 1, temp)
+                
+      helper(0, temp) 
+      return ans
+</pre>
+  
+</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small blue pt-4">
+  
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">
+        
+        <div id="disqus_thread"></div>
+      </div>
+      <!-- Copyright -->
+    
+    </footer>
+    <!-- Footer -->
+    
+    </div>
+
+
+
+    <!-- Scripts --> 
+
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/prettify.js"></script>
+    <!-- Script for pocket button -->
+    <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+    <!-- Print friendly -->
+    <script>var pfHeaderImgUrl = '';var pfHeaderTagline = '';var pfdisableClickToDel = 0;var pfHideImages = 0;var pfImageDisplayStyle = 'right';var pfDisablePDF = 0;var pfDisableEmail = 0;var pfDisablePrint = 0;var pfCustomCSS = '';var pfBtVersion='1';(function(){var js, pf;pf = document.createElement('script');pf.type = 'text/javascript';if ('https:' === document.location.protocol){js='https://pf-cdn.printfriendly.com/ssl/main.js'}else{js='http://cdn.printfriendly.com/printfriendly.js'}pf.src=js;document.getElementsByTagName('head')[0].appendChild(pf)})();</script>
+    <!-- Share button / http://sharebutton.co
+    <script src="https://cdn.rawgit.com/carrot/share-button/master/src/share-button.js"></script>-->
+
+
+    <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://wuyaheng.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</body>
+</html>
+
+
