@@ -238,7 +238,32 @@ class Solution:
       
       return new_node
 </pre>
-  <p class="text-center text-muted"><a href="https://leetcode.com/problems/subsets/" target="_blank">https://leetcode.com/problems/subsets/</a></p>
+
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/sum-of-left-leaves/" target="_blank">https://leetcode.com/problems/sum-of-left-leaves/</a></p>
+<pre>
+class Solution:
+  def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+      self.total = 0
+      
+      if root.left is None and root.right is None:
+          return 0
+          
+      def helper(root, prev):
+          if root is None:
+              return 0
+            
+          if root.left is None and root.right is None and root == prev.left:
+              self.total += root.val
+          
+          helper(root.left, root)
+          helper(root.right, root)
+              
+      helper(root, root)  
+      
+      return self.total
+</pre>
+
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/subsets/" target="_blank">https://leetcode.com/problems/subsets/</a></p>
 <pre>
 class Solution:
   def subsets(self, nums: List[int]) -> List[List[int]]:
@@ -255,7 +280,7 @@ class Solution:
       helper(0, temp) 
       return ans
 </pre>
-  
+
 </div>
       </div>
     </div>
