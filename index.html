@@ -239,6 +239,29 @@ class Solution:
       return new_node
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/leaf-similar-trees/" target="_blank">https://leetcode.com/problems/leaf-similar-trees/</a></p>
+<pre>
+class Solution:
+  def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
+      self.root1arr = []
+      self.root2arr = []
+      
+      def helper(root, arr):
+          if root is None:
+              return 0
+            
+          if root.left is None and root.right is None:
+              arr.append(root.val)   
+              
+          helper(root.left, arr)
+          helper(root.right, arr)
+          
+      helper(root1, self.root1arr)
+      helper(root2, self.root2arr)
+      
+      return self.root1arr == self.root2arr
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/sum-of-left-leaves/" target="_blank">https://leetcode.com/problems/sum-of-left-leaves/</a></p>
 <pre>
 class Solution:
