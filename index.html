@@ -262,6 +262,33 @@ class Solution:
       return self.root1arr == self.root2arr
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/find-all-the-lonely-nodes/" target="_blank">https://leetcode.com/problems/find-all-the-lonely-nodes/</a></p>
+<pre>
+class Solution:
+  def getLonelyNodes(self, root: Optional[TreeNode]) -> List[int]:
+      self.lonelynodes = []
+      
+      def helper(root, prev):
+          if root is None:
+              return None
+          
+          if prev:
+              if root == prev.left and prev.right is None:
+                  self.lonelynodes.append(root.val)              
+              if root == prev.right and prev.left is None:
+                  self.lonelynodes.append(root.val)  
+                  
+          prev = root   
+          
+          helper(root.left, prev)
+          helper(root.right, prev)
+          
+      helper(root, None)
+      
+      return self.lonelynodes
+</pre>
+
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/sum-of-left-leaves/" target="_blank">https://leetcode.com/problems/sum-of-left-leaves/</a></p>
 <pre>
 class Solution:
