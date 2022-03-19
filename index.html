@@ -262,6 +262,24 @@ class Solution:
       return self.root1arr == self.root2arr
 </pre>
 
+
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/symmetric-tree/" target="_blank">https://leetcode.com/problems/symmetric-tree/</a></p>
+<pre>
+class Solution:
+  def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+      if root is None:
+          return True
+      
+      def helper(root1, root2):
+          if root1 is None and root2 is None:
+              return True
+          if root1 is None or root2 is None:
+              return False 
+          return root1.val == root2.val and helper(root1.left, root2.right) and helper(root1.right, root2.left)
+      
+      return helper(root.left, root.right)
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/find-all-the-lonely-nodes/" target="_blank">https://leetcode.com/problems/find-all-the-lonely-nodes/</a></p>
 <pre>
 class Solution:
