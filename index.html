@@ -276,6 +276,29 @@ class Solution:
       return self.hasPathSum(root.left, targetSum - root.val) or self.hasPathSum(root.right, targetSum - root.val)
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/binary-tree-paths/" target="_blank">https://leetcode.com/problems/binary-tree-paths/</a></p>
+<pre>
+class Solution:
+  def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+      self.ans = []
+
+      def helper(root, temp):
+          if root is None:
+              return []
+
+          if root.left is None and root.right is None:
+              return self.ans.append(temp + str(root.val))
+                
+          temp += str(root.val) + "->"
+
+          helper(root.left, temp)  
+          helper(root.right, temp)
+            
+      helper(root, "")
+        
+      return self.ans 
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/symmetric-tree/" target="_blank">https://leetcode.com/problems/symmetric-tree/</a></p>
 <pre>
 class Solution:
