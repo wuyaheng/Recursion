@@ -262,6 +262,19 @@ class Solution:
       return self.root1arr == self.root2arr
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/path-sum/" target="_blank">https://leetcode.com/problems/path-sum/</a></p>
+<pre>
+class Solution:
+  def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        
+      if root is None:
+          return False
+        
+      if root.left is None and root.right is None and root.val == targetSum:
+          return True
+        
+      return self.hasPathSum(root.left, targetSum - root.val) or self.hasPathSum(root.right, targetSum - root.val)
+</pre>
 
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/symmetric-tree/" target="_blank">https://leetcode.com/problems/symmetric-tree/</a></p>
 <pre>
