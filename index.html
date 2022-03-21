@@ -243,8 +243,8 @@ class Solution:
 <pre>
 class Solution:
   def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
-      self.root1arr = []
-      self.root2arr = []
+      root1arr = []
+      root2arr = []
       
       def helper(root, arr):
           if root is None:
@@ -256,10 +256,10 @@ class Solution:
           helper(root.left, arr)
           helper(root.right, arr)
           
-      helper(root1, self.root1arr)
-      helper(root2, self.root2arr)
+      helper(root1, root1arr)
+      helper(root2, root2arr)
       
-      return self.root1arr == self.root2arr
+      return root1arr == root2arr
 </pre>
 
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/path-sum/" target="_blank">https://leetcode.com/problems/path-sum/</a></p>
@@ -280,14 +280,14 @@ class Solution:
 <pre>
 class Solution:
   def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
-      self.ans = []
+      ans = []
 
       def helper(root, temp):
           if root is None:
               return []
 
           if root.left is None and root.right is None:
-              return self.ans.append(temp + str(root.val))
+              return ans.append(temp + str(root.val))
                 
           temp += str(root.val) + "->"
 
@@ -296,7 +296,7 @@ class Solution:
             
       helper(root, "")
         
-      return self.ans 
+      return ans 
 </pre>
 
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/symmetric-tree/" target="_blank">https://leetcode.com/problems/symmetric-tree/</a></p>
@@ -320,7 +320,7 @@ class Solution:
 <pre>
 class Solution:
   def getLonelyNodes(self, root: Optional[TreeNode]) -> List[int]:
-      self.lonelynodes = []
+      lonelynodes = []
       
       def helper(root, prev):
           if root is None:
@@ -328,9 +328,9 @@ class Solution:
           
           if prev:
               if root == prev.left and prev.right is None:
-                  self.lonelynodes.append(root.val)              
+                  lonelynodes.append(root.val)              
               if root == prev.right and prev.left is None:
-                  self.lonelynodes.append(root.val)  
+                  lonelynodes.append(root.val)  
                   
           prev = root   
           
@@ -339,7 +339,7 @@ class Solution:
           
       helper(root, None)
       
-      return self.lonelynodes
+      return lonelynodes
 </pre>
 
 
@@ -405,6 +405,60 @@ class Solution:
       helper("", s)
       
       return self.ans
+</pre>
+
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank">https://leetcode.com/problems/letter-combinations-of-a-phone-number/</a></p>
+<pre>
+class Solution:
+  def letterCombinations(self, digits: str) -> List[str]:
+      if digits == "":
+          return []
+        
+      lookup = {
+          "2": "abc",
+          "3": "def",
+          "4": "ghi",
+          "5": "jkl",
+          "6": "mno",
+          "7": "pqrs",
+          "8": "tuv",
+          "9": "wxyz"
+      }
+        
+      ans = []
+        
+      def helper(temp, index):
+          if index == len(digits):
+              return ans.append(temp)
+            
+          for i in lookup[digits[index]]:
+              helper(temp + str(i), index + 1)
+        
+      helper("", 0)
+        
+      return ans
+</pre>
+
+
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/generate-parentheses/" target="_blank">https://leetcode.com/problems/generate-parentheses/</a></p>
+<pre>
+class Solution:
+  def generateParenthesis(self, n: int) -> List[str]:
+      ans = []
+        
+      def helper(temp, nob, ncb):
+          if nob > n or ncb > n or ncb > nob:
+              return
+            
+          if nob == ncb == n:
+              return ans.append(temp)
+            
+          helper(temp + "(", nob + 1, ncb)
+          helper(temp + ")", nob, ncb + 1)
+        
+      helper("", 0, 0)
+        
+      return ans
 </pre>
 
 </div>
