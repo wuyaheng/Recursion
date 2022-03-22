@@ -316,6 +316,30 @@ class Solution:
       return helper(root.left, root.right)
 </pre>
 
+
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/closest-binary-search-tree-value/" target="_blank">https://leetcode.com/problems/closest-binary-search-tree-value/</a></p>
+<pre>
+class Solution:
+  def closestValue(self, root: Optional[TreeNode], target: float) -> int:
+      self.closestVal = root.val
+          
+      def helper(root):
+          if root is None:
+              return
+            
+          if abs(root.val - target) < abs(self.closestVal - target):
+              self.closestVal = root.val
+
+          if root.val > target:
+              helper(root.left)
+          else:
+              helper(root.right)
+            
+      helper(root)     
+        
+      return self.closestVal
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/find-all-the-lonely-nodes/" target="_blank">https://leetcode.com/problems/find-all-the-lonely-nodes/</a></p>
 <pre>
 class Solution:
