@@ -431,6 +431,26 @@ class Solution:
       return self.ans
 </pre>
 
+<p class="text-center text-muted"><a href="https://leetcode.com/problems/palindrome-partitioning/" target="_blank">https://leetcode.com/problems/palindrome-partitioning/</a></p>
+<pre>
+class Solution:
+  def partition(self, s: str) -> List[List[str]]:
+      ans = []
+        
+      def helper(temp, s):
+          if len(s) == 0:
+              return ans.append(temp)
+            
+          for i in range(len(s)):  
+              part = s[: i + 1]
+              if part == part[:: -1]:
+                  helper(temp + [part], s[i + 1:])
+
+      helper([], s)
+        
+      return ans
+</pre>
+
 <p class="text-center text-muted"><a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank">https://leetcode.com/problems/letter-combinations-of-a-phone-number/</a></p>
 <pre>
 class Solution:
